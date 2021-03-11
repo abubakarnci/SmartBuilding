@@ -8,6 +8,7 @@ import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 
 
+
 public class HeatServer extends HeatServiceImplBase{
 
 	public static void main(String[] args) {
@@ -39,7 +40,7 @@ public class HeatServer extends HeatServiceImplBase{
 	//unary rpc 
 	public void heatSwitch(HeatRequest request,
             StreamObserver<HeatResponse> responseObserver) {
-        
+		System.out.println("-------------- Unary --------------");
 		Boolean check= request.getHeat();
 		
 		if (check==true) {
@@ -61,7 +62,7 @@ public class HeatServer extends HeatServiceImplBase{
 	//Server side streaming 
 	public void changeTemperature(TemperatureRequest request,
 			StreamObserver<TemperatureResponse> responseObserver) {
-		
+		System.out.println("-------------- Server Side Streaming --------------");
 		System.out.println("Request received: "+request.getNumbers()+" increments of temperature "+ request.getIncrement()+"°C.\nStarting from "+ request.getStart()+"°C");
 		
 		for(int i=1; i<=request.getNumbers(); i++) {
@@ -85,5 +86,55 @@ public class HeatServer extends HeatServiceImplBase{
 		
 	}
 	
+	public StreamObserver<SuggestRequest> suggestTemperature(StreamObserver <SuggestResponse> responseObserver){
+		
+		System.out.println("-------------- Bidirectional --------------");
+		return new StreamObserver<SuggestRequest>() {
 
+			@Override
+			public void onNext(SuggestRequest value) {
+				// TODO Auto-generated method stub
+				System.out.println("Receiving Date: "+ value.getDate() + " & Temperature guess: "+ value.getTemp()+"°C");
+				String input="";
+				if(value.getTemp() >=30) {
+					 input="TO HIGH";
+				}
+				else if(value.getTemp() <=10) {
+					 input="TO LOW";
+				}
+				else {
+					input="Nearly Same";
+				}
+				
+				SuggestResponse reply= SuggestResponse.newBuilder().setDate(value.getDate()).setTemp(value.getTemp()).setGuess(input).build();
+				
+				responseObserver.onNext(reply);
+			
+				try {
+					Thread.sleep(1500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			@Override
+			public void onError(Throwable t) {
+				// TODO Auto-generated method stub
+				t.printStackTrace();
+			}
+
+			@Override
+			public void onCompleted() {
+				// TODO Auto-generated method stub
+				System.out.println("Receiving suggestTemperature completed ");
+				responseObserver.onCompleted();
+			}
+			
+		};
+		
+	}
+	
+	
+	
 }

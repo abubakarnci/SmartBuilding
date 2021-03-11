@@ -27,6 +27,7 @@ message SuggestResponse{
 	
 	string date=1;
 	int32 temp=2;
+	string guess=3;
 	
 }
 

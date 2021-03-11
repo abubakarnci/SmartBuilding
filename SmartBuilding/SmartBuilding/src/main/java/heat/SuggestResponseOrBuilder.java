@@ -21,4 +21,14 @@ public interface SuggestResponseOrBuilder extends
    * <code>int32 temp = 2;</code>
    */
   int getTemp();
+
+  /**
+   * <code>string guess = 3;</code>
+   */
+  java.lang.String getGuess();
+  /**
+   * <code>string guess = 3;</code>
+   */
+  com.google.protobuf.ByteString
+      getGuessBytes();
 }

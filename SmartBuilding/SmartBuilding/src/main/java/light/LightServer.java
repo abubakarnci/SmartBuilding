@@ -39,7 +39,8 @@ public class LightServer extends LightServiceImplBase{
 	@Override
     public void powerSwitch(PowerRequest request,
             StreamObserver<PowerResponse> responseObserver) {
-        
+		System.out.println("-------------- Unary --------------");
+
 		Boolean check= request.getPower();
 		
 		if (check==true) {
@@ -59,9 +60,10 @@ public class LightServer extends LightServiceImplBase{
     }
 
 	public StreamObserver<ColourRequest> changeColour(final StreamObserver <ColourResponse> responseObserver){
-		
+		System.out.println("-------------- Client Side Streaming  --------------");
+
 		return new StreamObserver<ColourRequest>() {
-			
+
 			String colour="";
 			
 
@@ -93,7 +95,8 @@ public class LightServer extends LightServiceImplBase{
 	}
 	
 	public StreamObserver<BillRequest> calculateBill(StreamObserver<BillResponse> responseObserver){
-		
+		System.out.println("-------------- Bidirectional --------------");
+
 		
 		return new StreamObserver<BillRequest>() {
 

@@ -33,7 +33,8 @@ public class LightClient {
 	}
 		public static void calculateBill() {
 		// TODO Auto-generated method stub
-			
+			System.out.println("-------------- Bidirectional --------------");
+
 			StreamObserver<BillResponse> responseObserver= new StreamObserver<BillResponse>() {
 
 				int count=0;
@@ -54,7 +55,7 @@ public class LightClient {
 				@Override
 				public void onCompleted() {
 					// TODO Auto-generated method stub
-					System.out.println("stream is completed ... received "+ count+ " calculated bills");
+					System.out.println("Stream is completed ... received "+ count+ " calculated bills");
 					
 				}
 			};
@@ -96,7 +97,8 @@ public class LightClient {
 		// preparing the message request
 		private static void powerSwitch() {
 		// TODO Auto-generated method stub
-			
+			System.out.println("-------------- Unary --------------");
+
 			PowerRequest request= PowerRequest.newBuilder().setPower(true).build();
 			
 			// sending the message request & also receiving response 
@@ -115,7 +117,8 @@ public class LightClient {
 
 	private static void changeColour() {
 		// TODO Auto-generated method stub
-		
+		System.out.println("-------------- Client Side Streaming  --------------");
+
 		StreamObserver<ColourResponse> responseObserver = new StreamObserver<ColourResponse>() {
 
 			@Override

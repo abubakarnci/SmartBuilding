@@ -54,19 +54,19 @@ public final class HeatServiceImpl {
   static {
     java.lang.String[] descriptorData = {
       "\n\nheat.proto\022\004heat\",\n\016SuggestRequest\022\014\n\004" +
-      "date\030\001 \001(\t\022\014\n\004temp\030\002 \001(\005\"-\n\017SuggestRespo" +
-      "nse\022\014\n\004date\030\001 \001(\t\022\014\n\004temp\030\002 \001(\005\"\033\n\013HeatR" +
-      "equest\022\014\n\004heat\030\001 \001(\010\"\034\n\014HeatResponse\022\014\n\004" +
-      "heat\030\001 \001(\010\"G\n\022TemperatureRequest\022\017\n\007numb" +
-      "ers\030\001 \001(\005\022\r\n\005start\030\002 \001(\005\022\021\n\tincrement\030\003 " +
-      "\001(\005\"*\n\023TemperatureResponse\022\023\n\013temperatur" +
-      "e\030\001 \001(\0052\333\001\n\013HeatService\0225\n\nheatSwitch\022\021." +
-      "heat.HeatRequest\032\022.heat.HeatResponse\"\000\022L" +
-      "\n\021changeTemperature\022\030.heat.TemperatureRe" +
-      "quest\032\031.heat.TemperatureResponse\"\0000\001\022G\n\022" +
-      "suggestTemperature\022\024.heat.SuggestRequest" +
-      "\032\025.heat.SuggestResponse\"\000(\0010\001B\031\n\004heatB\017H" +
-      "eatServiceImplP\001b\006proto3"
+      "date\030\001 \001(\t\022\014\n\004temp\030\002 \001(\005\"<\n\017SuggestRespo" +
+      "nse\022\014\n\004date\030\001 \001(\t\022\014\n\004temp\030\002 \001(\005\022\r\n\005guess" +
+      "\030\003 \001(\t\"\033\n\013HeatRequest\022\014\n\004heat\030\001 \001(\010\"\034\n\014H" +
+      "eatResponse\022\014\n\004heat\030\001 \001(\010\"G\n\022Temperature" +
+      "Request\022\017\n\007numbers\030\001 \001(\005\022\r\n\005start\030\002 \001(\005\022" +
+      "\021\n\tincrement\030\003 \001(\005\"*\n\023TemperatureRespons" +
+      "e\022\023\n\013temperature\030\001 \001(\0052\333\001\n\013HeatService\0225" +
+      "\n\nheatSwitch\022\021.heat.HeatRequest\032\022.heat.H" +
+      "eatResponse\"\000\022L\n\021changeTemperature\022\030.hea" +
+      "t.TemperatureRequest\032\031.heat.TemperatureR" +
+      "esponse\"\0000\001\022G\n\022suggestTemperature\022\024.heat" +
+      ".SuggestRequest\032\025.heat.SuggestResponse\"\000" +
+      "(\0010\001B\031\n\004heatB\017HeatServiceImplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -91,7 +91,7 @@ public final class HeatServiceImpl {
     internal_static_heat_SuggestResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_heat_SuggestResponse_descriptor,
-        new java.lang.String[] { "Date", "Temp", });
+        new java.lang.String[] { "Date", "Temp", "Guess", });
     internal_static_heat_HeatRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_heat_HeatRequest_fieldAccessorTable = new
