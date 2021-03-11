@@ -129,6 +129,7 @@ public class LightClient {
 
 			@Override
 			public void onCompleted() {
+				//once completed
 				System.out.println("stream is completed ...");
 			}
 		};
