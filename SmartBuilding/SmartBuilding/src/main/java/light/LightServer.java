@@ -108,6 +108,12 @@ public class LightServer extends LightServiceImplBase{
 				BillResponse reply= BillResponse.newBuilder().setReading(value.getReading()).setBill(bill).build();
 				
 				responseObserver.onNext(reply);
+				try {
+					Thread.sleep(1500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 			}
 

@@ -15,6 +15,16 @@ public final class HeatServiceImpl {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_heat_SuggestRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_heat_SuggestRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_heat_SuggestResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_heat_SuggestResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_heat_HeatRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -43,16 +53,20 @@ public final class HeatServiceImpl {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\nheat.proto\022\004heat\"\033\n\013HeatRequest\022\014\n\004hea" +
-      "t\030\001 \001(\010\"\034\n\014HeatResponse\022\014\n\004heat\030\001 \001(\010\"G\n" +
-      "\022TemperatureRequest\022\017\n\007numbers\030\001 \001(\005\022\r\n\005" +
-      "start\030\002 \001(\005\022\021\n\tincrement\030\003 \001(\005\"*\n\023Temper" +
-      "atureResponse\022\023\n\013temperature\030\001 \001(\0052\222\001\n\013H" +
-      "eatService\0225\n\nheatSwitch\022\021.heat.HeatRequ" +
-      "est\032\022.heat.HeatResponse\"\000\022L\n\021changeTempe" +
-      "rature\022\030.heat.TemperatureRequest\032\031.heat." +
-      "TemperatureResponse\"\0000\001B\031\n\004heatB\017HeatSer" +
-      "viceImplP\001b\006proto3"
+      "\n\nheat.proto\022\004heat\",\n\016SuggestRequest\022\014\n\004" +
+      "date\030\001 \001(\t\022\014\n\004temp\030\002 \001(\005\"-\n\017SuggestRespo" +
+      "nse\022\014\n\004date\030\001 \001(\t\022\014\n\004temp\030\002 \001(\005\"\033\n\013HeatR" +
+      "equest\022\014\n\004heat\030\001 \001(\010\"\034\n\014HeatResponse\022\014\n\004" +
+      "heat\030\001 \001(\010\"G\n\022TemperatureRequest\022\017\n\007numb" +
+      "ers\030\001 \001(\005\022\r\n\005start\030\002 \001(\005\022\021\n\tincrement\030\003 " +
+      "\001(\005\"*\n\023TemperatureResponse\022\023\n\013temperatur" +
+      "e\030\001 \001(\0052\333\001\n\013HeatService\0225\n\nheatSwitch\022\021." +
+      "heat.HeatRequest\032\022.heat.HeatResponse\"\000\022L" +
+      "\n\021changeTemperature\022\030.heat.TemperatureRe" +
+      "quest\032\031.heat.TemperatureResponse\"\0000\001\022G\n\022" +
+      "suggestTemperature\022\024.heat.SuggestRequest" +
+      "\032\025.heat.SuggestResponse\"\000(\0010\001B\031\n\004heatB\017H" +
+      "eatServiceImplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -66,26 +80,38 @@ public final class HeatServiceImpl {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_heat_HeatRequest_descriptor =
+    internal_static_heat_SuggestRequest_descriptor =
       getDescriptor().getMessageTypes().get(0);
+    internal_static_heat_SuggestRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_heat_SuggestRequest_descriptor,
+        new java.lang.String[] { "Date", "Temp", });
+    internal_static_heat_SuggestResponse_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_heat_SuggestResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_heat_SuggestResponse_descriptor,
+        new java.lang.String[] { "Date", "Temp", });
+    internal_static_heat_HeatRequest_descriptor =
+      getDescriptor().getMessageTypes().get(2);
     internal_static_heat_HeatRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_heat_HeatRequest_descriptor,
         new java.lang.String[] { "Heat", });
     internal_static_heat_HeatResponse_descriptor =
-      getDescriptor().getMessageTypes().get(1);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_heat_HeatResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_heat_HeatResponse_descriptor,
         new java.lang.String[] { "Heat", });
     internal_static_heat_TemperatureRequest_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_heat_TemperatureRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_heat_TemperatureRequest_descriptor,
         new java.lang.String[] { "Numbers", "Start", "Increment", });
     internal_static_heat_TemperatureResponse_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_heat_TemperatureResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_heat_TemperatureResponse_descriptor,

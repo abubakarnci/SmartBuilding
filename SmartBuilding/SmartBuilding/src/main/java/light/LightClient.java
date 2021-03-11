@@ -64,9 +64,11 @@ public class LightClient {
 			try {
 
 				requestObserver.onNext(BillRequest.newBuilder().setReading(101).setPrice(0.8).setDiscount(10.0).build());
+				Thread.sleep(500);
 				requestObserver.onNext(BillRequest.newBuilder().setReading(150).setPrice(0.5).setDiscount(9.0).build());
+				Thread.sleep(500);
 				requestObserver.onNext(BillRequest.newBuilder().setReading(200).setPrice(0.65).setDiscount(20.0).build());
-
+				Thread.sleep(500);
 				// Mark the end of requests
 				requestObserver.onCompleted();
 
@@ -138,20 +140,20 @@ public class LightClient {
 		try {
 			// sending stream of requests
 			requestObserver.onNext(ColourRequest.newBuilder().setColour("Red").build());
-			Thread.sleep(500);
+			Thread.sleep(1500);
 			//System.out.println("Colour Change Request Sent");
 			requestObserver.onNext(ColourRequest.newBuilder().setColour("Blue").build());
-			Thread.sleep(500);
+			Thread.sleep(1500);
 			requestObserver.onNext(ColourRequest.newBuilder().setColour("Green").build());
-			Thread.sleep(500);
+			Thread.sleep(1500);
 			requestObserver.onNext(ColourRequest.newBuilder().setColour("Yellow").build());
-			Thread.sleep(500);
+			Thread.sleep(1500);
 			requestObserver.onNext(ColourRequest.newBuilder().setColour("Purple").build());
-			Thread.sleep(500);
+			Thread.sleep(1500);
 			
 			requestObserver.onCompleted();
 			
-			Thread.sleep(10000);
+			Thread.sleep(1000);
 			// catch any errors
 		} catch (RuntimeException e) {
             requestObserver.onError(e);

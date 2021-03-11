@@ -91,6 +91,38 @@ public final class HeatServiceGrpc {
      return getChangeTemperatureMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<heat.SuggestRequest,
+      heat.SuggestResponse> getSuggestTemperatureMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "suggestTemperature",
+      requestType = heat.SuggestRequest.class,
+      responseType = heat.SuggestResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+  public static io.grpc.MethodDescriptor<heat.SuggestRequest,
+      heat.SuggestResponse> getSuggestTemperatureMethod() {
+    io.grpc.MethodDescriptor<heat.SuggestRequest, heat.SuggestResponse> getSuggestTemperatureMethod;
+    if ((getSuggestTemperatureMethod = HeatServiceGrpc.getSuggestTemperatureMethod) == null) {
+      synchronized (HeatServiceGrpc.class) {
+        if ((getSuggestTemperatureMethod = HeatServiceGrpc.getSuggestTemperatureMethod) == null) {
+          HeatServiceGrpc.getSuggestTemperatureMethod = getSuggestTemperatureMethod = 
+              io.grpc.MethodDescriptor.<heat.SuggestRequest, heat.SuggestResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+              .setFullMethodName(generateFullMethodName(
+                  "heat.HeatService", "suggestTemperature"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  heat.SuggestRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  heat.SuggestResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new HeatServiceMethodDescriptorSupplier("suggestTemperature"))
+                  .build();
+          }
+        }
+     }
+     return getSuggestTemperatureMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -138,6 +170,16 @@ public final class HeatServiceGrpc {
       asyncUnimplementedUnaryCall(getChangeTemperatureMethod(), responseObserver);
     }
 
+    /**
+     * <pre>
+     *Bidirectional streaming
+     * </pre>
+     */
+    public io.grpc.stub.StreamObserver<heat.SuggestRequest> suggestTemperature(
+        io.grpc.stub.StreamObserver<heat.SuggestResponse> responseObserver) {
+      return asyncUnimplementedStreamingCall(getSuggestTemperatureMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -154,6 +196,13 @@ public final class HeatServiceGrpc {
                 heat.TemperatureRequest,
                 heat.TemperatureResponse>(
                   this, METHODID_CHANGE_TEMPERATURE)))
+          .addMethod(
+            getSuggestTemperatureMethod(),
+            asyncBidiStreamingCall(
+              new MethodHandlers<
+                heat.SuggestRequest,
+                heat.SuggestResponse>(
+                  this, METHODID_SUGGEST_TEMPERATURE)))
           .build();
     }
   }
@@ -196,6 +245,17 @@ public final class HeatServiceGrpc {
         io.grpc.stub.StreamObserver<heat.TemperatureResponse> responseObserver) {
       asyncServerStreamingCall(
           getChannel().newCall(getChangeTemperatureMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     *Bidirectional streaming
+     * </pre>
+     */
+    public io.grpc.stub.StreamObserver<heat.SuggestRequest> suggestTemperature(
+        io.grpc.stub.StreamObserver<heat.SuggestResponse> responseObserver) {
+      return asyncBidiStreamingCall(
+          getChannel().newCall(getSuggestTemperatureMethod(), getCallOptions()), responseObserver);
     }
   }
 
@@ -271,6 +331,7 @@ public final class HeatServiceGrpc {
 
   private static final int METHODID_HEAT_SWITCH = 0;
   private static final int METHODID_CHANGE_TEMPERATURE = 1;
+  private static final int METHODID_SUGGEST_TEMPERATURE = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -307,6 +368,9 @@ public final class HeatServiceGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_SUGGEST_TEMPERATURE:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.suggestTemperature(
+              (io.grpc.stub.StreamObserver<heat.SuggestResponse>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -360,6 +424,7 @@ public final class HeatServiceGrpc {
               .setSchemaDescriptor(new HeatServiceFileDescriptorSupplier())
               .addMethod(getHeatSwitchMethod())
               .addMethod(getChangeTemperatureMethod())
+              .addMethod(getSuggestTemperatureMethod())
               .build();
         }
       }

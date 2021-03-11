@@ -12,7 +12,26 @@ service HeatService{
 	
 	//Server side streaming 
 	rpc changeTemperature(TemperatureRequest) returns (stream TemperatureResponse) {} 
+
+	//Bidirectional streaming
+	rpc suggestTemperature(stream SuggestRequest) returns (stream SuggestResponse){}
 }
+
+message SuggestRequest{
+	
+	string date=1;
+	int32 temp=2;
+
+}
+message SuggestResponse{
+	
+	string date=1;
+	int32 temp=2;
+	
+}
+
+
+
 
 message HeatRequest{
 
