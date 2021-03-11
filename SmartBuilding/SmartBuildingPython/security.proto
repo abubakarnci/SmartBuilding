@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "security";
+option java_outer_classname = "SecurityProto";
+option objc_class_prefix = "SECU";
+
+package security;
+
+service SecurityService{
+  //unary
+  rpc securitySwitch (SecurityRequest) returns (SecurityResponse){}
+
+  //server side streaming
+  rpc Liststaff(ListRequest) returns (stream ListResponse){}
+
+  //client side streaming
+  rpc grantAccess(stream AccessRequest) returns (AccessResponse){}
+
+}
+
+message SecurityRequest{
+  string security=1;
+}
+message SecurityResponse{
+  string security=1;
+}
+
+
+message ListRequest{
+  string ask=1;
+}
+message ListResponse{
+  string ans=1;
+}
+
+
+message AccessRequest{
+  string name=1;
+  //string id=2;
+  //string password=3;
+}
+message AccessResponse{
+  string reply=1;
+}

@@ -1,0 +1,37 @@
+syntax ="proto3";
+
+option java_multiple_files=true;
+option java_package= "heat";
+option java_outer_classname= "HeatServiceImpl";
+
+package heat;
+
+service HeatService{
+	//unary
+	rpc heatSwitch(HeatRequest) returns (HeatResponse){}
+	
+	//Server side streaming 
+	rpc changeTemperature(TemperatureRequest) returns (stream TemperatureResponse) {} 
+}
+
+message HeatRequest{
+
+	bool heat=1;
+	
+}
+message HeatResponse{
+
+	bool heat=1;
+	
+}
+
+message TemperatureRequest {
+    int32 numbers = 1;
+    int32 start=2;
+    int32 increment=3;
+}
+
+message TemperatureResponse {
+    int32 temperature = 1;
+}
+

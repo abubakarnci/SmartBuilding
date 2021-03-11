@@ -1,0 +1,60 @@
+syntax ="proto3";
+
+option java_multiple_files=true;
+option java_package= "light";
+option java_outer_classname= "LightServiceImpl";
+
+package light;
+
+service LightService{
+
+//unary
+	rpc powerSwitch(PowerRequest) returns (PowerResponse){}
+//Client side streaming 
+	rpc changeColour(stream ColourRequest) returns (ColourResponse){}
+//Bidirectional streaming
+	rpc calculateBill(stream BillRequest) returns (stream BillResponse){}
+
+}
+
+message BillRequest{
+	
+	int32 reading=1;
+	double price=2;
+	double discount=3;
+
+}
+message BillResponse{
+	
+	int32 reading=1;
+	double bill=2;
+	
+}
+
+
+
+
+message PowerRequest{
+
+	bool power=1;
+	
+}
+message PowerResponse{
+
+	bool power=1;
+	
+}
+
+message ColourRequest{
+
+	string colour=1;
+	
+}
+message ColourResponse{
+
+	string colour=1;
+	
+}
+
+
+
