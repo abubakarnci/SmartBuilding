@@ -31,6 +31,8 @@ public class SmartBuildingServiceRegistration {
             
             
             jmdns.unregisterAllServices();
+            
+            Thread.sleep(10000);
 		} 
 		catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
