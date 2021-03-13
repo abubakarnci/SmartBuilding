@@ -11,6 +11,7 @@ light\BillRequest.class
 light\LightServiceImpl.class
 light\ColourResponse$1.class
 light\LightServiceGrpc$LightServiceFileDescriptorSupplier.class
+heat\HeatClient$2.class
 heat\TemperatureResponseOrBuilder.class
 light\LightServer.class
 heat\SuggestResponse.class
@@ -19,6 +20,7 @@ heat\SuggestResponse$1.class
 light\LightServiceGrpc$LightServiceBaseDescriptorSupplier.class
 heat\TemperatureRequest.class
 light\LightServer$2.class
+heat\HeatServer$1.class
 heat\HeatServiceGrpc$HeatServiceImplBase.class
 light\LightServiceGrpc$LightServiceMethodDescriptorSupplier.class
 heat\HeatClient.class
