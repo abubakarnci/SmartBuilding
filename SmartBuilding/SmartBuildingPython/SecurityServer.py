@@ -25,9 +25,12 @@ class Security(security_pb2_grpc.SecurityServiceServicer):
             time.sleep(2)
 
     def grantAccess (self, request, context):
-        print("Server received Access request")
 
-        return security_pb2.AccessResponse(reply="Access Granted")
+        for x in  request:
+            print("Server received Access request for: "+x.name+"("+x.id+")")
+
+        return security_pb2.AccessResponse(reply="Today's Access Granted to above staff")
+
 
 
 

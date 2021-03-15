@@ -37,7 +37,7 @@ message ListResponse{
 
 message AccessRequest{
   string name=1;
-  //string id=2;
+  string id=2;
   //string password=3;
 }
 message AccessResponse{

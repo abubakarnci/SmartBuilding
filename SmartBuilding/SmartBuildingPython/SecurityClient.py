@@ -14,18 +14,36 @@ def list_staff(stub):
         print("Name: %s" % (feature.ans))
 
 
-def grant_access(stub):
-    print("Sending credentials to server")
-    name="Sam"
-    id="x17112044"
-    password="1234567"
 
-    staff = ["Sam", "Lisa", "Jay", "John", "Shiobhan", "Umer", "Muhammad", "Mark"]
+def make_access(inputNam, inputId):
+    return security_pb2.AccessRequest(name=inputNam, id=inputId)
+
+
+
+def generate_access():
+    staff = [
+        make_access("Sam","x198774588"),
+        make_access("Lisa","x178997544"),
+        make_access("Jay","x18459759"),
+        make_access("John","x16598745"),
+        make_access("Shiobhan","x18759785"),
+        make_access("Umer","x17268745"),
+        make_access("Muhammad","x17112044"),
+        make_access("Mark","x19872563")]
+
+    print("Sending names to server")
     for x in staff:
         print(x)
-        summ=stub.grantAccess(security_pb2.AccessRequest(name=x))
-        time.sleep(0.5)
-    print(summ.reply)
+        time.sleep(1)
+        yield x
+
+def grant_access(stub):
+
+    response= stub.grantAccess(generate_access())
+    print(response.reply)
+
+
+
 
 
 
@@ -47,6 +65,7 @@ def run():
         print("-------------- Unary --------------")
         print("Client received: " + response.security)
 
+        time.sleep(2)
 
         #sever side streaming
         print("-------------- Sever Side Streaming --------------")
