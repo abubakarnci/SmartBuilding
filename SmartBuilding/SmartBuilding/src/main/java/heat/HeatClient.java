@@ -140,7 +140,7 @@ public class HeatClient {
 		// TODO Auto-generated method stub
 		System.out.println("-------------- Unary --------------");
 
-		boolean input=true;
+		boolean input=false;
 		System.out.println("Want to turned ON heating? "+input);
 		
 		HeatRequest request= HeatRequest.newBuilder().setHeat(input).build();
