@@ -62,7 +62,7 @@ private Properties getProperties() {
 	            prop.load(input);
 
 	            // get the property value and print it out
-	            System.out.println("Math Service properies ...");
+	            System.out.println("Heat Service properies ...");
 	            System.out.println("\t service_type: " + prop.getProperty("service_type"));
 	            System.out.println("\t service_name: " +prop.getProperty("service_name"));
 	            System.out.println("\t service_description: " +prop.getProperty("service_description"));

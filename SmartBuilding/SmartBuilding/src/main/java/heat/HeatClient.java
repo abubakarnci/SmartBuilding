@@ -56,7 +56,7 @@ public class HeatClient {
 			@Override
 			public void onCompleted() {
 				// TODO Auto-generated method stub
-				System.out.println("Stream is completed ... received "+ count+ " calculated bills");
+				System.out.println("Stream is completed ... received "+ count+ " gusses");
 				
 			}
 			

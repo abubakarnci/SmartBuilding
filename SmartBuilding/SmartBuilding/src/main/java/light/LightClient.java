@@ -99,7 +99,12 @@ public class LightClient {
 		// TODO Auto-generated method stub
 			System.out.println("-------------- Unary --------------");
 
-			PowerRequest request= PowerRequest.newBuilder().setPower(true).build();
+			
+			boolean input=false;
+			System.out.println("Want to turned ON Light? "+input);
+			
+			
+			PowerRequest request= PowerRequest.newBuilder().setPower(input).build();
 			
 			// sending the message request & also receiving response 
 			PowerResponse response=	blockingStub.powerSwitch(request);

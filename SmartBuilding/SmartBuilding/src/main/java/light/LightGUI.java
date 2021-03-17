@@ -1,13 +1,13 @@
-package heat;
+package light;
 
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -22,31 +22,25 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import heat.HeatServiceGrpc.HeatServiceBlockingStub;
-import heat.HeatServiceGrpc.HeatServiceStub;
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
-import io.grpc.stub.StreamObserver;
-
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import java.awt.BorderLayout;
-import java.awt.Font;
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+import io.grpc.stub.StreamObserver;
+import light.LightServiceGrpc.LightServiceBlockingStub;
+import light.LightServiceGrpc.LightServiceStub;
 
-public class HeatGUI {
+public class LightGUI {
+	
+	private static LightServiceBlockingStub blockingStub;
+	private static LightServiceStub asyncStub;
 
-	private static HeatServiceBlockingStub blockingStub1;
-	private static HeatServiceStub asyncStub1;
+	private ServiceInfo lightServiceInfo;
 	
-	private ServiceInfo heatServiceInfo;
-	
-	
-	
-	
+
 	private JFrame frame;
 	private JTextArea textResponse;
 	private JTextArea textArea;
@@ -58,8 +52,10 @@ public class HeatGUI {
 	private JTextField textNumber3;
 	private JTextField textNumber4;
 	
-	ArrayList<Integer> temp=new ArrayList<Integer>();
-	ArrayList<String> date=new ArrayList<String>();
+	ArrayList<String> color=new ArrayList<String>();
+	ArrayList<Integer> readi=new ArrayList<Integer>();
+	ArrayList<Double> pri=new ArrayList<Double>();
+	ArrayList<Double> dis=new ArrayList<Double>();
 	
 	/**
 	 * Launch the application.
@@ -68,7 +64,7 @@ public class HeatGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HeatGUI window = new HeatGUI();
+					LightGUI window = new LightGUI();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -80,14 +76,13 @@ public class HeatGUI {
 	/**
 	 * Create the application.
 	 */
-	public HeatGUI() {
+	public LightGUI() {
 		
-
-		String heat_service_type = "_heat._tcp.local.";
-		discoverHeatService(heat_service_type);
+		String light_service_type = "_light._tcp.local.";
+		discoverLightService(light_service_type);
 		
 		String host = "localhost"; //heatServiceInfo.getHostAddresses()[0];
-		int port = 50052; //heatServiceInfo.getPort();
+		int port = 50051; //heatServiceInfo.getPort();
 		
 		ManagedChannel channel = ManagedChannelBuilder
 				.forAddress(host, port)
@@ -95,15 +90,14 @@ public class HeatGUI {
 				.build();
 
 		//stubs -- generate from proto
-		blockingStub1 = HeatServiceGrpc.newBlockingStub(channel);
-
-		asyncStub1 = HeatServiceGrpc.newStub(channel);
-		
+		blockingStub=	LightServiceGrpc.newBlockingStub(channel);
+		asyncStub = LightServiceGrpc.newStub(channel);
 		
 		initialize();
 	}
-	
-	private void discoverHeatService(String service_type) {
+
+	private void discoverLightService(String service_type) {
+		// TODO Auto-generated method stub
 		
 		
 		try {
@@ -115,32 +109,32 @@ public class HeatGUI {
 				
 				@Override
 				public void serviceResolved(ServiceEvent event) {
-					System.out.println("Heat Service resolved: " + event.getInfo());
+					System.out.println("Light Service resolved: " + event.getInfo());
 
-					heatServiceInfo = event.getInfo();
+					lightServiceInfo = event.getInfo();
 
-					int port = heatServiceInfo.getPort();
+					int port = lightServiceInfo.getPort();
 					
 					System.out.println("resolving " + service_type + " with properties ...");
 					System.out.println("\t port: " + port);
 					System.out.println("\t type:"+ event.getType());
 					System.out.println("\t name: " + event.getName());
-					System.out.println("\t description/properties: " + heatServiceInfo.getNiceTextString());
-					System.out.println("\t host: " + heatServiceInfo.getHostAddresses()[0]);
+					System.out.println("\t description/properties: " + lightServiceInfo.getNiceTextString());
+					System.out.println("\t host: " + lightServiceInfo.getHostAddresses()[0]);
 				
 					
 				}
 				
 				@Override
 				public void serviceRemoved(ServiceEvent event) {
-					System.out.println("Heat Service removed: " + event.getInfo());
+					System.out.println("Light Service removed: " + event.getInfo());
 
 					
 				}
 				
 				@Override
 				public void serviceAdded(ServiceEvent event) {
-					System.out.println("Heat Service added: " + event.getInfo());
+					System.out.println("Light Service added: " + event.getInfo());
 
 					
 				}
@@ -160,11 +154,8 @@ public class HeatGUI {
 			e.printStackTrace();
 		}
 		
-		
 	}
-	
-	
-	
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -176,14 +167,13 @@ public class HeatGUI {
 		
 		BoxLayout bl = new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS);
 		frame.getContentPane().setLayout(bl);
-		
-		
-		
+	
+	
 		JPanel panel_1 = new JPanel();
 		frame.getContentPane().add(panel_1);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 	
-		JLabel lblNewLabel_1 = new JLabel("Heating Switch");
+		JLabel lblNewLabel_1 = new JLabel("Light Switch");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
 		panel_1.add(lblNewLabel_1);
 		
@@ -193,7 +183,10 @@ public class HeatGUI {
 		
 		JButton btnCalculate = new JButton("Done!!!");
 		btnCalculate.addActionListener(new ActionListener() {
+
+			@Override
 			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
 				
 				int index = comboOperation.getSelectedIndex();
 				boolean input=false;
@@ -206,25 +199,26 @@ public class HeatGUI {
 				
 				System.out.println("Index: "+input);
 				
-				HeatRequest request= HeatRequest.newBuilder().setHeat(input).build();
+				PowerRequest request= PowerRequest.newBuilder().setPower(input).build();
 				
-				HeatResponse response= blockingStub1.heatSwitch(request);
+				// sending the message request & also receiving response 
+				PowerResponse response=	blockingStub.powerSwitch(request);
 				
-				if(response.getHeat()==true) {
-					System.out.println("Server response: Heating turned ON ");
-					textResponse.append("Server response: Heating turned ON \n");
+				//priniting response from server
+				
+				if(response.getPower()==true) {
+					System.out.println("Server response: Light turned ON ");
+					textResponse.append("Server response: Light turned ON \n");
 					
 				}
 				else {
-					System.out.println("Server response: Heating turned OFF ");
-					textResponse.append("Server response: Heating turned OFF \n");
+					System.out.println("Server response: Light turned OFF ");
+					textResponse.append("Server response: Light turned OFF \n");
 					
 				}
-				
-				
-
 			}
 		});
+		
 		panel_1.add(btnCalculate);
 		textResponse = new JTextArea(3, 20);
 		textResponse .setLineWrap(true);
@@ -235,131 +229,21 @@ public class HeatGUI {
 		//textResponse.setSize(new Dimension(15, 30));
 		panel_1.add(scrollPane);
 		
-		
-		
 		//2nd panel
 		JPanel panel_2 = new JPanel();
 		frame.getContentPane().add(panel_2);
 		panel_2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JLabel lblNewLabel_2 = new JLabel("Temperature Increment");
+		JLabel lblNewLabel_2 = new JLabel("Add Light Colours");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
 		panel_2.add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("Start Temp:");
+		JLabel lblNewLabel_3 = new JLabel("Colour:");
 		panel_2.add(lblNewLabel_3);
 		
 		textNumber1 = new JTextField();
-
 		panel_2.add(textNumber1);
 		textNumber1.setColumns(5);
-		
-		JLabel lblNewLabel_4 = new JLabel("Increment Jump:");
-		panel_2.add(lblNewLabel_4);
-		
-		textNumber2 = new JTextField();
-		panel_2.add(textNumber2);
-		textNumber2.setColumns(5);
-		
-		JButton btnFinal = new JButton("Final!!!");
-		
-		btnFinal.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent o) {
-				
-				int num1 = Integer.parseInt(textNumber1.getText());
-				int num2 = Integer.parseInt(textNumber2.getText());
-
-				
-				TemperatureRequest request= TemperatureRequest.newBuilder()
-						.setNumbers(5).setStart(num1).setIncrement(num2).build();
-				
-				StreamObserver<TemperatureResponse> responseObserver= new StreamObserver<TemperatureResponse>(){
-
-					int count =0;
-					
-					@Override
-					public void onNext(TemperatureResponse value) {
-						// TODO Auto-generated method stub
-						System.out.println("Next temperature: " + value.getTemperature()+"°C");
-						
-						textArea.append("Next temperature: " + value.getTemperature()+"°C \n");
-						
-						
-						count += 1;
-						
-					}
-
-					@Override
-					public void onError(Throwable t) {
-						// TODO Auto-generated method stub
-						t.printStackTrace();
-						
-					}
-
-					@Override
-					public void onCompleted() {
-						// TODO Auto-generated method stub
-						System.out.println("stream is completed ... received "+ count);
-						textArea.append("stream is completed ... received "+ count);
-						
-					}
-					
-				};
-				asyncStub1.changeTemperature(request, responseObserver);
-				try {
-					Thread.sleep(10000);
-				} catch (InterruptedException p) {
-					// TODO Auto-generated catch block
-					p.printStackTrace();
-				}	
-				
-
-			}
-		});
-		
-		
-		
-		panel_2.add(btnFinal);
-		
-		textArea = new JTextArea(3,30);
-		
-		textArea .setLineWrap(true);
-		textArea.setWrapStyleWord(true);
-		
-		JScrollPane scrollPane1 = new JScrollPane(textArea);
-		
-		
-		panel_2.add(scrollPane1);
-		
-		
-		
-		
-		
-		
-		//3rd panel
-		JPanel panel_3 = new JPanel();
-		frame.getContentPane().add(panel_3);
-		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		
-		JLabel lblNewLabel_5 = new JLabel("Temperature Guess");
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-		panel_3.add(lblNewLabel_5);
-		
-		
-		JLabel lblNewLabel_6 = new JLabel("Temperature:");
-		panel_3.add(lblNewLabel_6);
-		
-		textNumber3 = new JTextField();
-		panel_3.add(textNumber3);
-		textNumber3.setColumns(7);
-		
-		JLabel lblNewLabel_7 = new JLabel("Date:");
-		panel_3.add(lblNewLabel_7);
-		
-		textNumber4 = new JTextField();
-		panel_3.add(textNumber4);
-		textNumber4.setColumns(9);
 		
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
@@ -369,29 +253,140 @@ public class HeatGUI {
 				
 				//String date = textNumber4.getText();
 				
-				date.add(textNumber4.getText());
-				temp.add(Integer.parseInt(textNumber3.getText()));
+				color.add(textNumber1.getText());
+				JOptionPane.showMessageDialog(null,"Colour Added");
+			}
+		});
+		panel_2.add(btnAdd);
+	
+		JButton btnFinal = new JButton("Final!!!");
+		
+		btnFinal.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent o) {
+				// TODO Auto-generated method stub
+				
+				StreamObserver<ColourResponse> responseObserver = new StreamObserver<ColourResponse>() {
+
+					@Override
+					public void onNext(ColourResponse value) {
+						// Print out response
+						System.out.println("Colour has been set to " + value.getColour());
+						textArea.append("Colour has been set to " + value.getColour()+"\n");
+						
+					}
+
+					@Override
+					public void onError(Throwable t) {
+
+					}
+
+					@Override
+					public void onCompleted() {
+						//once completed
+						System.out.println("stream is completed ...");
+						textArea.append("stream is completed ...");
+						
+					}
+				};
+				
+				StreamObserver<ColourRequest> requestObserver = asyncStub.changeColour(responseObserver);
+				try {
+					// sending stream of requests
+					for(int i=0; i<color.size(); i++) {
+						requestObserver.onNext(ColourRequest.newBuilder().setColour(color.get(i)).build());
+						Thread.sleep(1500);
+					}				
+					requestObserver.onCompleted();
+					
+					Thread.sleep(1000);
+					// catch any errors
+				} catch (RuntimeException e) {
+		            requestObserver.onError(e);
+		            throw e;
+		            } catch (InterruptedException e) {
+
+		                e.printStackTrace();
+		        }	
+				
+			}	
+		});
+		
+		panel_2.add(btnFinal);
+		
+		textArea = new JTextArea(2,30);
+		
+		textArea .setLineWrap(true);
+		textArea.setWrapStyleWord(true);
+		
+		JScrollPane scrollPane1 = new JScrollPane(textArea);
+		panel_2.add(scrollPane1);
+		
+		//3rd panel
+		JPanel panel_3 = new JPanel();
+		frame.getContentPane().add(panel_3);
+		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		JLabel lblNewLabel_4 = new JLabel("Calculate Bill");
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
+		panel_3.add(lblNewLabel_4);
+		
+		JLabel lblNewLabel_5 = new JLabel("Reading:");
+		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		panel_3.add(lblNewLabel_5);
+		
+		textNumber2 = new JTextField();
+		panel_3.add(textNumber2);
+		textNumber2.setColumns(7);
+		
+		JLabel lblNewLabel_6 = new JLabel("Price:");
+		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		panel_3.add(lblNewLabel_6);
+		
+		textNumber3 = new JTextField();
+		panel_3.add(textNumber3);
+		textNumber3.setColumns(7);
+		
+		JLabel lblNewLabel_7 = new JLabel("Discount:");
+		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		panel_3.add(lblNewLabel_7);
+		
+		textNumber4 = new JTextField();
+		panel_3.add(textNumber4);
+		textNumber4.setColumns(9);
+		
+		JButton btnAddd = new JButton("Add");
+		btnAddd.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				
+				readi.add(Integer.parseInt(textNumber2.getText()));
+				dis.add(Double.parseDouble(textNumber4.getText()));
+				pri.add(Double.parseDouble(textNumber3.getText()));
 				JOptionPane.showMessageDialog(null,"ADDED");
 			}
 		});
-		panel_3.add(btnAdd);
+		panel_3.add(btnAddd);
 		
 		JButton btnFinish = new JButton("Finish!!!");
 		btnFinish.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent l) {
+			public void actionPerformed(ActionEvent p) {
 				// TODO Auto-generated method stub
-				
-				
-				StreamObserver<SuggestResponse> responseObserver= new StreamObserver<SuggestResponse>() {
+			
+				StreamObserver<BillResponse> responseObserver= new StreamObserver<BillResponse>() {
 
 					int count=0;
+					
 					@Override
-					public void onNext(SuggestResponse value) {
+					public void onNext(BillResponse value) {
 						// TODO Auto-generated method stub
-						System.out.println("Your guess "+ value.getTemp()+" is " + value.getGuess() + ". Date: "+ value.getDate() );
-						textArea2.append("Your guess "+ value.getTemp()+" is " + value.getGuess() + ". Date: "+ value.getDate() );
+						System.out.println("Receiving calculated bill €" + value.getBill() + " of reading: "+ value.getReading() );
+						textArea2.append("Receiving calculated bill €" + value.getBill() + " of reading: "+ value.getReading()+"\n");
 						count += 1;
 					}
 
@@ -404,18 +399,17 @@ public class HeatGUI {
 					@Override
 					public void onCompleted() {
 						// TODO Auto-generated method stub
-						System.out.println("Stream is completed ... received "+ count+ " gusses");
-						textArea2.append("Stream is completed ... received "+ count+ " gusses");
+						System.out.println("Stream is completed ... received "+ count+ " calculated bills");
+						textArea2.append("Stream is completed ... received "+ count+ " calculated bills");
 					}
-					
 				};
-
-				StreamObserver<SuggestRequest> requestObserver = asyncStub1.suggestTemperature(responseObserver);
+				StreamObserver<BillRequest> requestObserver = asyncStub.calculateBill(responseObserver);
+				
 				
 				try {
 
-					for(int i=0; i<date.size(); i++) {
-						requestObserver.onNext(SuggestRequest.newBuilder().setDate(date.get(i)).setTemp(temp.get(i)).build());
+					for(int i=0; i<pri.size(); i++) {
+						requestObserver.onNext(BillRequest.newBuilder().setReading(readi.get(i)).setPrice(pri.get(i)).setDiscount(dis.get(i)).build());
 						Thread.sleep(500);
 					}
 					// Mark the end of requests
@@ -423,7 +417,7 @@ public class HeatGUI {
 
 
 					// Sleep for a bit before sending the next one.
-					Thread.sleep(new Random().nextInt(1000));
+					Thread.sleep(new Random().nextInt(1000) + 500);
 
 
 				} catch (RuntimeException e) {
@@ -439,12 +433,12 @@ public class HeatGUI {
 					e.printStackTrace();
 				}
 				
+				
 			}
 			
 		});
-		
 		panel_3.add(btnFinish);
-				
+		
 		textArea2 = new JTextArea(3,30);
 		
 		textArea2 .setLineWrap(true);
@@ -455,5 +449,8 @@ public class HeatGUI {
 		
 		panel_3.add(scrollPane2);
 		
+		
+		
 	}
+
 }
