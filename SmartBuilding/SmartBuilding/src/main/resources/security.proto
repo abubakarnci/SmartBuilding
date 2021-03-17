@@ -2,8 +2,8 @@ syntax = "proto3";
 
 option java_multiple_files = true;
 option java_package = "security";
-option java_outer_classname = "SecurityProto";
-option objc_class_prefix = "SECU";
+option java_outer_classname = "SecurityServiceImpl";
+
 
 package security;
 

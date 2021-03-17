@@ -58,14 +58,21 @@ def grant_access(stub):
 def run():
     with grpc.insecure_channel('localhost:50053') as channel:
         stub = security_pb2_grpc.SecurityServiceStub(channel)
-        response = stub.securitySwitch(security_pb2.SecurityRequest(security='Turn ON security'))
 
-        time.sleep(2)
-        # unary
         print("-------------- Unary --------------")
-        print("Client received: " + response.security)
+        check=False
+        print("Want to turned ON Security? "+str(check));
+        response = stub.securitySwitch(security_pb2.SecurityRequest(security=check))
 
-        time.sleep(2)
+        if response.security==True:
+            print("Server response: Security turned ON")
+
+        elif response.security==False:
+            print("Server response: Security turned OFF")
+
+        # unary
+
+        time.sleep(4)
 
         #sever side streaming
         print("-------------- Sever Side Streaming --------------")

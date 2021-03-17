@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n\010securityB\rSecurityProtoP\001\242\002\004SECU',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0esecurity.proto\x12\x08security\"#\n\x0fSecurityRequest\x12\x10\n\x08security\x18\x01 \x01(\t\"$\n\x10SecurityResponse\x12\x10\n\x08security\x18\x01 \x01(\t\"\x1a\n\x0bListRequest\x12\x0b\n\x03\x61sk\x18\x01 \x01(\t\"\x1b\n\x0cListResponse\x12\x0b\n\x03\x61ns\x18\x01 \x01(\t\")\n\rAccessRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\t\"\x1f\n\x0e\x41\x63\x63\x65ssResponse\x12\r\n\x05reply\x18\x01 \x01(\t2\xe2\x01\n\x0fSecurityService\x12I\n\x0esecuritySwitch\x12\x19.security.SecurityRequest\x1a\x1a.security.SecurityResponse\"\x00\x12>\n\tListstaff\x12\x15.security.ListRequest\x1a\x16.security.ListResponse\"\x00\x30\x01\x12\x44\n\x0bgrantAccess\x12\x17.security.AccessRequest\x1a\x18.security.AccessResponse\"\x00(\x01\x42\"\n\x08securityB\rSecurityProtoP\x01\xa2\x02\x04SECUb\x06proto3'
+  serialized_pb=b'\n\x0esecurity.proto\x12\x08security\"#\n\x0fSecurityRequest\x12\x10\n\x08security\x18\x01 \x01(\x08\"$\n\x10SecurityResponse\x12\x10\n\x08security\x18\x01 \x01(\x08\"\x1a\n\x0bListRequest\x12\x0b\n\x03\x61sk\x18\x01 \x01(\t\"\x1b\n\x0cListResponse\x12\x0b\n\x03\x61ns\x18\x01 \x01(\t\")\n\rAccessRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\t\"\x1f\n\x0e\x41\x63\x63\x65ssResponse\x12\r\n\x05reply\x18\x01 \x01(\t2\xe2\x01\n\x0fSecurityService\x12I\n\x0esecuritySwitch\x12\x19.security.SecurityRequest\x1a\x1a.security.SecurityResponse\"\x00\x12>\n\tListstaff\x12\x15.security.ListRequest\x1a\x16.security.ListResponse\"\x00\x30\x01\x12\x44\n\x0bgrantAccess\x12\x17.security.AccessRequest\x1a\x18.security.AccessResponse\"\x00(\x01\x42\"\n\x08securityB\rSecurityProtoP\x01\xa2\x02\x04SECUb\x06proto3'
 )
 
 
@@ -35,8 +35,8 @@ _SECURITYREQUEST = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='security', full_name='security.SecurityRequest.security', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -67,8 +67,8 @@ _SECURITYRESPONSE = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='security', full_name='security.SecurityResponse.security', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),

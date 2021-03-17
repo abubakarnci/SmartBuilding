@@ -9,14 +9,23 @@ import security_pb2_grpc
 
 class Security(security_pb2_grpc.SecurityServiceServicer):
     def securitySwitch(self, request, context):
-        print("Server received request: "+request.security)
+        print("Server received request: "+str(request.security))
         time.sleep(2)
-        print("Security is turning ON")
-        return security_pb2.SecurityResponse(security="Security is turned ON")
+
+        if request.security==True:
+            print("Security is turning ON")
+            return security_pb2.SecurityResponse(security=True)
+
+        elif request.security==False:
+            print("Security is turning OFF")
+            return security_pb2.SecurityResponse(security=False)
+
+
+
 
 
     def Liststaff(self, request, context):
-        print("Server received request: " + request.ask)
+        print("Server received staff request: " + request.ask)
 
         staff = ["Sam", "Lisa", "Jay", "John", "Shiobhan", "Umer", "Muhammad", "Mark"]
         for x in staff:
