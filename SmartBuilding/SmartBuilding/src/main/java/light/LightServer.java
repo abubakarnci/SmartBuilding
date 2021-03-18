@@ -19,6 +19,7 @@ public class LightServer extends LightServiceImplBase{
 	public static void main(String[] args) {
 
 		LightServer lightserver=new LightServer();
+		// peoperties file
 		Properties prop= lightserver.getProperties();
 		
 		lightserver.registerService(prop);
@@ -52,6 +53,7 @@ private Properties getProperties() {
 		
 		Properties prop = null;		
 		
+		//reading file
 		 try (InputStream input = new FileInputStream("src/main/resources/light.properties")) {
 
 	            prop = new Properties();

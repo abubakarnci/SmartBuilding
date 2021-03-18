@@ -27,6 +27,7 @@ public class LightClient {
 		blockingStub=	LightServiceGrpc.newBlockingStub(channel);
 		asyncStub = LightServiceGrpc.newStub(channel);
 		
+		//methods for grpc implementations 
 		powerSwitch();
 		changeColour();
 		calculateBill();
@@ -35,6 +36,7 @@ public class LightClient {
 		// TODO Auto-generated method stub
 			System.out.println("-------------- Bidirectional --------------");
 
+			//input stream
 			StreamObserver<BillResponse> responseObserver= new StreamObserver<BillResponse>() {
 
 				int count=0;
@@ -59,6 +61,7 @@ public class LightClient {
 					
 				}
 			};
+			//output stream
 			StreamObserver<BillRequest> requestObserver = asyncStub.calculateBill(responseObserver);
 			
 			

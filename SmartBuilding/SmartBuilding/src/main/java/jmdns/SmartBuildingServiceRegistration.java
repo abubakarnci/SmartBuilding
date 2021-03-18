@@ -16,7 +16,7 @@ public class SmartBuildingServiceRegistration {
 			 // Create a JmDNS instance
 			JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
 		
-			// Register a service
+			// Registering services
 			ServiceInfo light = ServiceInfo.create("_http._tcp.local.", "light", 50051, "Controlling lights");
             jmdns.registerService(light);
 			

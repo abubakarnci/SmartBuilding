@@ -86,6 +86,8 @@ public class HeatGUI {
 		String heat_service_type = "_heat._tcp.local.";
 		discoverHeatService(heat_service_type);
 		
+		// i was getting errors thats why specifying host and port  
+		
 		String host = "localhost"; //heatServiceInfo.getHostAddresses()[0];
 		int port = 50052; //heatServiceInfo.getPort();
 		
@@ -178,7 +180,7 @@ public class HeatGUI {
 		frame.getContentPane().setLayout(bl);
 		
 		
-		
+		// 1st panel 
 		JPanel panel_1 = new JPanel();
 		frame.getContentPane().add(panel_1);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));

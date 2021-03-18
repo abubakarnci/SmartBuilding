@@ -16,6 +16,7 @@ public class HeatClient {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
+		// host and port of this service
 		String host="localhost";
 		int port=50052;
 		
@@ -27,7 +28,7 @@ public class HeatClient {
 		blockingStub1= HeatServiceGrpc.newBlockingStub(channel);
 		asyncStub1= HeatServiceGrpc.newStub(channel);
 		
-		
+		//methods
 		heatSwitch();
 		changeTemperature();
 		suggestTemperature();
@@ -37,12 +38,14 @@ public class HeatClient {
 		// TODO Auto-generated method stub
 		System.out.println("-------------- Bidirectional --------------");
 
+		//setting-up stream observer  
 		StreamObserver<SuggestResponse> responseObserver= new StreamObserver<SuggestResponse>() {
 
 			int count=0;
 			@Override
 			public void onNext(SuggestResponse value) {
 				// TODO Auto-generated method stub
+				//next input
 				System.out.println("Your guess "+ value.getTemp()+" is " + value.getGuess() + ". Date: "+ value.getDate() );
 				count += 1;
 			}
@@ -56,6 +59,8 @@ public class HeatClient {
 			@Override
 			public void onCompleted() {
 				// TODO Auto-generated method stub
+				
+				//once completed
 				System.out.println("Stream is completed ... received "+ count+ " gusses");
 				
 			}
@@ -66,6 +71,7 @@ public class HeatClient {
 		
 		try {
 
+			//inputs from user 
 			requestObserver.onNext(SuggestRequest.newBuilder().setDate("02.02.2022").setTemp(60).build());
 			Thread.sleep(500);
 			requestObserver.onNext(SuggestRequest.newBuilder().setDate("08.03.2022").setTemp(9).build());
@@ -98,6 +104,7 @@ public class HeatClient {
 		// TODO Auto-generated method stub
 		System.out.println("-------------- Server Side Streaming --------------");
 
+		//inputs from user
 		TemperatureRequest request= TemperatureRequest.newBuilder()
 				.setNumbers(5).setStart(1).setIncrement(3).build();
 		
@@ -108,6 +115,7 @@ public class HeatClient {
 			@Override
 			public void onNext(TemperatureResponse value) {
 				// TODO Auto-generated method stub
+				//next input
 				System.out.println("Next temperature: " + value.getTemperature()+"°C");
 				count += 1;
 				
@@ -143,8 +151,9 @@ public class HeatClient {
 		boolean input=false;
 		System.out.println("Want to turned ON heating? "+input);
 		
+		//sending to server
 		HeatRequest request= HeatRequest.newBuilder().setHeat(input).build();
-		
+		//getting response
 		HeatResponse response= blockingStub1.heatSwitch(request);
 		
 		if(response.getHeat()==true) {

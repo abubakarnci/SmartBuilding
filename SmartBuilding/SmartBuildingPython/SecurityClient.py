@@ -6,7 +6,7 @@ import time
 
 
 def list_staff(stub):
-    print("Requesting staff present in office")
+    print("Requesting people present in building")
 
     features = stub.Liststaff(security_pb2.ListRequest(ask='How many people are in building'))
     print("Client received")

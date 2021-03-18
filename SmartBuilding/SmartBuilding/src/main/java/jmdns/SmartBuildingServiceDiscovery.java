@@ -15,7 +15,7 @@ public class SmartBuildingServiceDiscovery implements ServiceListener {
 		// TODO Auto-generated method stub
 		SmartBuildingServiceDiscovery discoverService=new SmartBuildingServiceDiscovery();
 		
-		
+		//settingup jmdns
 		try {
 			JmDNS jmdns=JmDNS.create(InetAddress.getLocalHost());
 			

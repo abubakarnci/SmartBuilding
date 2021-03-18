@@ -170,7 +170,7 @@ public class SecurityGUI {
 		BoxLayout bl = new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS);
 		frame.getContentPane().setLayout(bl);
 	
-	
+		//1st panel
 		JPanel panel_1 = new JPanel();
 		frame.getContentPane().add(panel_1);
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
