@@ -393,7 +393,7 @@ public class HeatGUI {
 					public void onNext(SuggestResponse value) {
 						// TODO Auto-generated method stub
 						System.out.println("Your guess "+ value.getTemp()+" is " + value.getGuess() + ". Date: "+ value.getDate() );
-						textArea2.append("Your guess "+ value.getTemp()+" is " + value.getGuess() + ". Date: "+ value.getDate() );
+						textArea2.append("Your guess "+ value.getTemp()+" is " + value.getGuess() + ". Date: "+ value.getDate() +"\n");
 						count += 1;
 					}
 

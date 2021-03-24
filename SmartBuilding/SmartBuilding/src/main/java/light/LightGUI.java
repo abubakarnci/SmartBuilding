@@ -400,7 +400,7 @@ public class LightGUI {
 					public void onCompleted() {
 						// TODO Auto-generated method stub
 						System.out.println("Stream is completed ... received "+ count+ " calculated bills");
-						textArea2.append("Stream is completed ... received "+ count+ " calculated bills");
+						textArea2.append("Stream is completed ... received "+ count+ " calculated bills \n");
 					}
 				};
 				StreamObserver<BillRequest> requestObserver = asyncStub.calculateBill(responseObserver);
